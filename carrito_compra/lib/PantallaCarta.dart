@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:carrito_compra/PantallaInicio.dart';
 import 'package:carrito_compra/model/carta.dart';
 import 'package:carrito_compra/PantallaCarrito.dart';
+import 'package:carrito_compra/PantallaRestaurant.dart';
 
 class PantallaCarta extends StatefulWidget {
   @override
@@ -369,19 +370,25 @@ class MenuLateral extends StatelessWidget {
               },
             ),
             InkWell(
-              child: new ListTile(
-                title: new Text("CARRITO", style: TextStyle(color: const Color.fromARGB(255, 250, 175, 48)),),
+              child: ListTile(
+                title: new Text("CARRITO", style: TextStyle(color: const Color.fromARGB(255, 250, 175, 48))),
                 leading: Icon(Icons.shopping_cart, color: const Color.fromARGB(255, 250, 175, 48)),
               ),
-              onTap:(){
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext) => PantallaCarrito()),
+                );
               },
             ),
             InkWell(
-              child: new ListTile(
-                title: new Text("RESTAURANT", style: TextStyle(color: const Color.fromARGB(255, 250, 175, 48)),),
-                leading: Icon(Icons.restaurant, color: const Color.fromARGB(255, 250, 175, 48)),
+              child: ListTile(
+                title: Text("RESTAURANT", style: TextStyle(color: Color.fromARGB(255, 250, 175, 48))),
+                leading: Icon(Icons.restaurant, color: Color.fromARGB(255, 250, 175, 48)),
               ),
-              onTap:(){;
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext) => PantallaRestaurant()),
+                );
               },
             ),
           ],
