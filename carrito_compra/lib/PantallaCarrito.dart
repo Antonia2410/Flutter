@@ -16,12 +16,19 @@ class _PantallaCarritoState extends State<PantallaCarrito> {
             title: Text("PEDIDOS"),
             elevation: 0,
             backgroundColor: Colors.amberAccent,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: Colors.red,),
+              onPressed: (){
+                Navigator.pop(context);
+              },
+            )
           ),
           body: Container(
             child: carrito.items.length == 0
                 ? Center(
                   child: Text("El carrito está vacío"),)
-                : Column(
+                : SingleChildScrollView(
+                  child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       for (var item in carrito.items.values) 
@@ -144,8 +151,24 @@ class _PantallaCarritoState extends State<PantallaCarrito> {
                           Text("S/." + carrito.Total.toString(), style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                         ],
                       ),*/
+                      SizedBox(height: 80)
                     ],
                   ),
+                )  
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: (){
+              String pedido = "";
+              carrito.items.forEach((key, value) {
+                pedido = '$pedido' + value.nombre + " CANTIDAD: " + value.cantidad.toString() + " PRECIO UNITARIO: " + value.precio.toString() + " PRECIO TOTAL: " + (value.precio * value.cantidad).toStringAsFixed(2) + "\n";
+              });
+              pedido = '$pedido' + "SUBTOTAL: " + carrito.subTotal.toStringAsFixed(2) + "\n";
+              pedido = '$pedido' + "IMPUESTO: " + carrito.impuesto.toStringAsFixed(2) + "\n";
+              pedido = '$pedido' + "TOTAL: " + carrito.Total.toStringAsFixed(2) + "\n";
+              print(pedido);
+            },
+            child: Icon(Icons.send, color: Colors.amberAccent,),
+            backgroundColor: Colors.red,
           ),
         );
       },
